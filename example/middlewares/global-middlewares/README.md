@@ -3,9 +3,8 @@
 Global middleware is applied to all routes and is registered using `app.use()` without a specific route path. This type of middleware is typically used for tasks that need to be executed on every request, such as parsing `request bodies`, `setting headers`, or `logging`.
 
 ```ts
-// Import the RangoJS and http module
+// Import the RangoJS
 import rango from "rango";
-import http from "http";
 
 // Import middlewares
 import bodyParser from "body-parser";
@@ -29,7 +28,7 @@ app.add({
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
