@@ -3,9 +3,8 @@
 Query Params are a mighty tool that allows you to pass data to your server through the URL query string, making your routes more versatile and powerful. Query Params are key-value pairs that come after the ? in the URL. You can access them in your route handlers using the req.query object. In this section, we'll explore how to use Query Params in your RangoJS routes, so let's saddle up and get started!
 
 ```ts
-// Import RangoJS and http module
+// Import RangoJS
 import rango from "rango";
-import http from "http";
 
 // Create an instance of the RangoJS app
 const app = rango();
@@ -21,8 +20,8 @@ app.add({
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
 
