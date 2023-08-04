@@ -195,8 +195,8 @@ We started the server on `port 3000` using
 
 ```ts
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
 
@@ -473,9 +473,8 @@ To use middleware in RangoJS, you can employ the `app.use()` method or specify m
 Global middleware is applied to all routes and is registered using app.use() without a specific route path. This type of middleware is typically used for tasks that need to be executed on every request, such as parsing `request bodies`, `setting headers`, or `logging`.
 
 ```ts
-// Import RangoJS and http module
+// Import RangoJS
 import rango from "rango";
-import http from "http";
 
 // Import middlewares
 import bodyParser from "body-parser";
@@ -499,8 +498,8 @@ app.add({
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
 
@@ -553,8 +552,8 @@ app.add([
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
 
@@ -592,8 +591,8 @@ app.add([
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
 
@@ -651,9 +650,8 @@ And that's it, cowboy coder! You've successfully integrated Express.js middlewar
 Path Params are a powerful feature that allows you to extract dynamic values from the URL path, making your routes more flexible and versatile. Path Params are placeholders in the URL path that allow you to capture dynamic values and access them in your route handlers. You can define a Path Param using a colon followed by the param name. In this section, we'll explore how to use Path Params in your RangoJS routes, so let's hit the trail and get started!
 
 ```ts
-// Import RangoJS and http module
+// Import RangoJS
 import rango from "rango";
-import http from "http";
 
 // Create an instance of the RangoJS app
 const app = rango();
@@ -683,8 +681,8 @@ app.add({
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
 
@@ -763,9 +761,9 @@ With this powerful feature of Path Params, you can create dynamic and flexible r
 Query Params are a mighty tool that allows you to pass data to your server through the URL query string, making your routes more versatile and powerful. Query Params are key-value pairs that come after the ? in the URL. You can access them in your route handlers using the req.query object. In this section, we'll explore how to use Query Params in your RangoJS routes, so let's saddle up and get started!
 
 ```ts
-// Import RangoJS and http module
+// Import RangoJS
 import rango from "rango";
-import http from "http";
+
 
 // Create an instance of the RangoJS app
 const app = rango();
@@ -781,8 +779,8 @@ app.add({
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
 
