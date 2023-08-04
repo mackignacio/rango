@@ -133,8 +133,8 @@ We started the server on `port 3000` using
 
 ```ts
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 ```
 
