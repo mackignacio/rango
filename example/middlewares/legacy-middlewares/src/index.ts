@@ -1,6 +1,5 @@
 // Import the RangoJS and http module
 import rango from "rango";
-import http from "http";
 
 // Import the Express.js `cors` middleware
 import cors from "cors";
@@ -17,6 +16,6 @@ app.add([
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
