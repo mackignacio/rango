@@ -9,6 +9,11 @@ function use(plugin: Middleware) {
   plugins.push(plugin);
 }
 
+function listen(this: Router, ...args: ListenFnArgs) {
+  const server = http.createServer(this);
+  return server.listen.apply(server, args);
+}
+
 function add(route: Route): void;
 function add(route: Route[]): void;
 function add(routes: RouteWithChildren): void;
@@ -23,6 +28,7 @@ function add(
 
 export type RangoApp = {
   use: (plugin: Middleware) => void;
+  listen: (port: number, cb: () => void) => void;
   add: {
     (routes: RouteWithChildren): void;
     (routes: RouteWithMiddlewares): void;
@@ -36,4 +42,6 @@ export type RangoApp = {
 
 export type Router = ((req: http.IncomingMessage, res: http.ServerResponse) => void) & RangoApp;
 
-export default Object.assign(handler, { use, add, headers: { "X-Powered-By": "RangoJS" } });
+type ListenFnArgs = [port: number, listeningListener?: (() => void) | undefined];
+
+export default Object.assign(handler, { use, add, listen, headers: { "X-Powered-By": "RangoJS" } });
