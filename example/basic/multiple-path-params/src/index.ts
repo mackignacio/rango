@@ -1,6 +1,5 @@
 // Import RangoJS and http module
 import rango from "rango";
-import http from "http";
 
 // Create an instance of the RangoJS app
 const app = rango();
@@ -61,6 +60,6 @@ app.add({
 
 // Start the server
 const port = 3000;
-http.createServer(app).listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
