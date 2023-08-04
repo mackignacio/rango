@@ -28,7 +28,7 @@ function add(
 
 export type RangoApp = {
   use: (plugin: Middleware) => void;
-  listen: (port: number, cb: () => void) => void;
+  listen: (port: number, listener: () => void) => void;
   add: {
     (routes: RouteWithChildren): void;
     (routes: RouteWithMiddlewares): void;
