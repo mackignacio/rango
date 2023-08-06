@@ -92,7 +92,8 @@ function checkRoutePathExist(pathname: string): RouteObject | undefined {
   // Why we use for-of instead of map, forEach or reduce
   for (const value of paths) {
     const prevRegex = routeObj?.regex ?? "";
-    routeObj = !routeObj ? routes.get(value) : checkRouteChildrenPathExist(routeObj.children, value);
+    const childrenExists = (routeObj: RouteObject) => checkRouteChildrenPathExist(routeObj.children, value) ?? routeObj;
+    routeObj = !routeObj ? createRouteObject(value, routes) : createRouteObject(childrenExists(routeObj));
     middlewares = [...middlewares, ...(routeObj?.middlewares ?? [])];
 
     if (routeObj !== undefined) {
