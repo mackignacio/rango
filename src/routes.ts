@@ -70,12 +70,16 @@ function mapEndpoints(route: Route) {
 }
 
 function createRouteObject(route: CreateRoute): RouteObject;
+function createRouteObject(path: string, parent: Map<string, RouteObject>): RouteObject;
 function createRouteObject(route: CreateRoute, parent: Map<string, RouteObject>): RouteObject;
-function createRouteObject(route: CreateRoute, parent?: Map<string, RouteObject>): RouteObject {
-  const isExist = parent?.get(route.path);
-  if (isExist) return isExist;
+function createRouteObject(route: CreateRoute | string, parent?: Map<string, RouteObject>): RouteObject {
+  const isString = typeof route === "string";
+  const routePath = isString ? route : route.path;
+  const isExist = parent?.get(routePath);
 
-  const { path, endpoints = [], middlewares = [], children = new Map<string, RouteObject>() } = route;
+  if (isExist || (isString && isExist)) return isExist;
+
+  const { path, endpoints = [], middlewares = [], children = new Map<string, RouteObject>() } = route as CreateRoute;
   return { regex: RegEx(path), path, hasParam: path.includes(":"), endpoints, middlewares, children };
 }
 
