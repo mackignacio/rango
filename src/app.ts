@@ -3,11 +3,16 @@ import handler from "./handler";
 import { createRouteMapper } from "./routes";
 import { Route, RouteWithChildren, RouteWithMiddlewares } from "./interfaces";
 import { checkUsedPort, findOpenPort, freeAddressPort, taskKill } from "./port";
-import { Middleware } from "./types";
+import { Guards, Middleware } from "./types";
 import plugins from "./plugins";
 import Logger from "./logger";
 import settings from "./settings";
 import { createWebSocket, runWebsocket } from "./websocket";
+import guards from "./guards";
+
+function guardRoute(_guards: Guards) {
+  guards.push(...[..._guards]);
+}
 
 function logger(enable: boolean): void;
 function logger(logFn: Middleware): void;
@@ -69,6 +74,7 @@ function add(
 }
 
 export type RangoApp = {
+  guardRoute: (_guards: Guards) => void;
   use: (plugin: Middleware) => void;
   listen: (port: number, listener?: () => void) => void;
   add: {
@@ -91,4 +97,12 @@ export type Router = ((req: http.IncomingMessage, res: http.ServerResponse) => v
 
 type ListenFnArgs = [port: number, listener?: (() => void) | undefined];
 
-export default Object.assign(handler, { use, add, logger, listen, killPort, headers: { "X-Powered-By": "RangoJS" } });
+export default Object.assign(handler, {
+  guardRoute,
+  use,
+  add,
+  logger,
+  listen,
+  killPort,
+  headers: { "X-Powered-By": "RangoJS" },
+});

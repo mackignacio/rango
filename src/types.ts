@@ -80,3 +80,13 @@ export type Routes = Route[];
  *
  */
 export type RouteEndpoints = RouteEndpoint[];
+
+/**
+ *
+ */
+export type Guard = (context: Context) => Promise<boolean> | boolean;
+
+/**
+ *
+ */
+export type Guards = Guard[];

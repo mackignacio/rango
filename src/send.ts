@@ -2,8 +2,9 @@ import { checkEndpointExist, checkRoutePathExist } from "./routes";
 import { Context, RouteObject } from "./interfaces";
 import sendFile, { isFileRequest } from "./static";
 import mapMiddlewares from "./middleware";
-import { RouteCallback } from "./types";
+import { Guard, RouteCallback } from "./types";
 import plugins from "./plugins";
+import guards from "./guards";
 import RegEx from "./regex";
 import cache from "./cache";
 
@@ -58,6 +59,10 @@ async function send(context: Context): Promise<void> {
     // Set the status code of the response
     return res.send(response, response?.statusCode);
   };
+
+  if (guards.some((e: Guard) => e(context) == false)) {
+    res.send({ message: "Route Guarded", status: "ServerError", error: true }, 403);
+  }
 
   try {
     // Build all middlewares to one single middlewares
